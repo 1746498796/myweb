@@ -137,9 +137,6 @@
 		</div>
 	</div>
 
-
-
-
 	<!-- Home static background -->
 	<section id="home" class="home">
 		<div class="header large bg-img fixed background-one">
@@ -150,7 +147,7 @@
 				<h2 class="bigtext text-white uber mb0" th:text="${index1.getWorkname()}"></h2>
 				<h6 class="serif bigtext text-white" th:text="${index1.getWorksay()}"></h6>
 				<a class="scrollto btn outline light grid-mt grid-ms" href="#intro">浏览更多</a>
-				<a class="popup-vimeo btn white grid-mt grid-ms" href="javascript:;"><i class="fa fa-play"></i> 播放视频</a>
+				<a class="popup-vimeo btn white grid-mt grid-ms" th:href="@{/vdieo}"><i class="fa fa-play"></i> 播放视频</a>
 			</div>
 		</div>
 	</section>
@@ -845,6 +842,8 @@
 			document.getElementById("wxImg").style.display='none';
 		}
 	</script>
+
+
 
 
 
