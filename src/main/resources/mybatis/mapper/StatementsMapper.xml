@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.StatementsMapper">
+    <select id="queryAll" resultType="Statements">
+        select *
+        from myweb.statements
+    </select>
+
+    <select id="queryByID" resultType="Statements">
+        select *
+        from myweb.statements
+        where id = #{id}
+    </select>
+
+    <update id="upDateByID" parameterType="Statements">
+        update myweb.statements
+        set one=#{one},two=#{two}
+        where id = #{id};
+    </update>
+
+    <insert id="insertOne" parameterType="Statements">
+        insert into myweb.statements(id,one,two)
+        values(#{id},#{one},#{two})
+    </insert>
+
+    <delete id="deleteByID">
+        delete from myweb.statements
+        where id= #{id}
+    </delete>
+</mapper>

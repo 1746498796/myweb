@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<script src="/static/js/modernizr.js"></script>
+
+	<title>标题</title>
+
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="description" content="The description of your website">
+	<meta name="keywords" content="the, website, keywords">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- Fonts -->
+	<link href='/static/css/css.css' rel='stylesheet' type='text/css'>
+	<link href='/static/css/css1.css' rel='stylesheet' type='text/css'>
+
+	<!-- Essential stylesheets -->
+	<link rel="stylesheet" th:href="@{/static/css/font-awesome.min.css}">
+	<link rel="stylesheet" href="/static/css/magnific-popup.css">
+	<link rel="stylesheet" href="/static/css/bxslider.css">
+	<link rel="stylesheet" href="/static/css/owl.carousel.css">
+	<link rel="stylesheet" href="/static/css/owl.theme.css">
+	<link rel="stylesheet" href="/static/css/base.css">
+
+	<!-- The stylesheet -->
+	<link rel="stylesheet" href="/static/css/style.css">
+
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<script src="/static/js/jquery-3.6.0.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+	<script th:src="@{/static/js/jquery-3.6.0.js}"></script>
+	<script>
+		// function f(){
+		// 	$.ajax({
+		// 		type:"post",
+		// 		url: "/insertCustomer",
+		// 		data:{"email":$('#email').val(),"phone":$('#phone').val(),"comments":$('#comments').val(),"username":$('#username').val()},
+		// 		success:function (data){
+		// 			console.log(data['msg']);
+		// 			/*swal({
+		// 				title : data,
+		// 				type : "success",
+		// 				confirmButtonText : "确定",
+		// 				closeOnConfirm : false,
+		// 			});*/
+		// 		}
+		// 	})
+		// }
+		$(function (){
+			$("#submit").click(
+					function (){
+						$.ajax({
+							type:"post",
+							url: "/insertCustomer",
+							data:{"cont":$("#cont").val(),"email":$('#email').val(),"phone":$('#phone').val(),"comments":$('#comments').val()},
+							success:function (data){
+								console.log("下面输出的是date");
+								console.log(data);
+								if (data == "提交成功"){
+									swal({
+										title : data,
+										type : "success",
+										confirmButtonText : "确定",
+										closeOnConfirm : false,
+									});
+								}else {
+									swal({
+										title : data,
+										text:"请检查昵称和手机号",
+										type : "warning",
+										confirmButtonText : "确定",
+										closeOnConfirm : false,
+									});
+								}
+							}
+						})
+					}
+			)
+		})
+	</script>
+
+	<style>
+		.spanStyle{
+			white-space: nowrap;  /*强制span不换行*/
+			display: inline-block;  /*将span当做块级元素对待*/
+			width: 32px;  /*限制宽度*/
+			overflow: hidden;  /*超出宽度部分隐藏*/
+			text-overflow: ellipsis;  /*超出部分以点号代替*/
+			line-height: 0.9;  /*数字与之前的文字对齐*/
+		}
+	</style>
+</head>
+
+
+<body>
+
+
+	<!-- Top of the page -->
+	<div id="top"></div>
+
+
+	<!-- Top bar -->
+	<div class="top-bar tb-large tb-transp">
+		<div class="row">
+			<div class="twelve col">
+
+
+				<!-- Symbolic or typographic logo -->
+				<div class="tb-logo">
+					<a href="#home" class="scrollto"><img src="/static/picture/logo.png" alt="logo"></a>
+					<h1><a href="#home" class="scrollto" th:text="${index1.getWorkname()}"></a></h1>
+				</div>
+
+
+				<!-- Menu toggle -->
+				<input type="checkbox" id="toggle">
+				<label for="toggle" class="toggle"></label>
+
+
+				<!-- Menu items -->
+				<nav class="menu">
+					<ul>
+						<li><a href="#home" class="scrollto">首页</a>
+						</li>
+						<li><a href="#work" class="scrollto">公司产品</a>
+						<li><a href="#process" class="scrollto">制作流程</a></li>
+						<li><a href="#about" class="scrollto">关于</a></li>
+						<li><a href="#contact" class="scrollto">联系我们</a></li>
+					</ul>
+				</nav>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Home static background -->
+	<section id="home" class="home">
+		<div class="header large bg-img fixed background-one">
+			<div class="header-inner">
+
+
+				<!-- Content -->
+				<h2 class="bigtext text-white uber mb0" th:text="${index1.getWorkname()}"></h2>
+				<h6 class="serif bigtext text-white" th:text="${index1.getWorksay()}"></h6>
+				<a class="scrollto btn outline light grid-mt grid-ms" href="#intro">浏览更多</a>
+				<a class="popup-vimeo btn white grid-mt grid-ms" href="javascript:;"><i class="fa fa-play"></i> 播放视频</a>
+			</div>
+		</div>
+	</section>
+
+
+
+
+	<!-- Introduction -->
+	<section id="intro" class="intro">
+
+
+		<!-- Introduction text -->
+		<div class="row">
+			<div class="eight col center text-center">
+				<h3 class="uber" th:text="${index1.getUber()}"></h3>
+			</div>
+		</div>
+
+
+		<!-- Icon navigation -->
+		<div class="row equal">
+
+
+			<!-- Icon -->
+			<div class="three col medium-three col small-six col">
+				<div class="icon-nav">
+					<a href="#work" class="scrollto">
+						<i class="fa fa-briefcase"></i>
+						<b th:text="${index1.getComproducts()}"></b>
+						<em th:text="${index1.getComproductsay()}"></em>
+					</a>
+				</div>
+			</div>
+
+
+			<!-- Icon -->
+			<div class="three col medium-three col small-six col">
+				<div class="icon-nav">
+					<a href="#process" class="scrollto">
+						<i class="fa fa-star-o"></i>
+						<b th:text="${index1.getService()}"></b>
+						<em th:text="${index1.getServicesay()}"></em>
+					</a>
+				</div>
+			</div>
+
+
+			<!-- Icon -->
+			<div class="three col medium-three col small-six col">
+				<div class="icon-nav">
+					<a href="#about" class="scrollto">
+						<i class="fa fa-thumbs-o-up"></i>
+						<b th:text="${index1.getAbout()}"></b>
+						<em th:text="${index1.getAboutsay()}"></em>
+					</a>
+				</div>
+			</div>
+
+
+			<!-- Icon -->
+			<div class="three col medium-three col small-six col">
+				<div class="icon-nav">
+					<a href="#contact" class="scrollto">
+						<i class="fa fa-envelope-o"></i>
+						<b th:text="${index1.getContact()}"></b>
+						<em th:text="${index1.getContactsay()}"></em>
+					</a>
+				</div>
+			</div>
+
+
+		</div>
+	</section>
+
+
+
+
+	<!-- Work ****************************************************-->
+	<!--<section id="work" class="work section-slider">
+
+
+		&lt;!&ndash; Title &ndash;&gt;
+		<div class="row title">
+			<h2>公司产品</h2>
+			<hr>
+		</div>
+
+
+		&lt;!&ndash; Work slider &ndash;&gt;
+		<div class="row relative" >
+			<div class="owlcarousel work-slider" id="product">
+
+
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<a class="popup" th:href="@{'/static/picture/'+${products[0].getImgname()}}">
+							<span class="o-hover">
+								<span>
+									<i class="fa fa-film fa-2x"></i>
+								</span>
+							</span>
+							<img th:src="@{'/static/picture/'+${products[0].getImgname()}}"  alt="portfolio-thumb-1" class="responsive-img">
+						</a>
+					</div>
+					<div class="e-info">
+						<h3 th:text="${products[0].getPtable()}"></h3>
+						<p th:text="${products[0].getPtext()}"></p>
+					</div>
+				</div>
+
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<a class="popup" th:href="@{'/static/picture/'+${products[1].getImgname()}}">
+							<span class="o-hover">
+								<span>
+									<i class="fa fa-film fa-2x"></i>
+								</span>
+							</span>
+							<img th:src="@{'/static/picture/'+${products[1].getImgname()}}" alt="portfolio-thumb-2" class="responsive-img">
+						</a>
+					</div>
+					<div class="e-info">
+						<h3 th:text="${products[1].getPtable()}"></h3>
+						<p th:text="${products[1].getPtext()}"></p>
+					</div>
+				</div>
+
+
+
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<a class="popup" th:href="@{'/static/picture/'+${products[2].getImgname()}}">
+							<span class="o-hover">
+								<span>
+									<i class="fa fa-search fa-2x"></i>
+								</span>
+							</span>
+							<img th:src="@{'/static/picture/'+${products[2].getImgname()}}" alt="portfolio-thumb-3" class="responsive-img">
+						</a>
+					</div>
+					<div class="e-info">
+						<h3 th:text="${products[2].getPtable()}"></h3>
+						<p th:text="${products[2].getPtext()}"></p>
+					</div>
+				</div>
+
+
+
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<a class="popup" th:href="@{'/static/picture/'+${products[3].getImgname()}}">
+							<span class="o-hover">
+								<span>
+									<i class="fa fa-image fa-2x"></i>
+								</span>
+							</span>
+							<img th:src="@{'/static/picture/'+${products[3].getImgname()}}" alt="portfolio-thumb-4" class="responsive-img">
+						</a>
+					</div>
+					<div class="e-info">
+						<h3 th:text="${products[3].getPtable()}"></h3>
+						<p th:text="${products[3].getPtext()}"></p>
+					</div>
+				</div>
+
+
+
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<a class="popup" th:href="@{'/static/picture/'+${products[4].getImgname()}}">
+							<span class="o-hover">
+								<span>
+									<i class="fa fa-search fa-2x"></i>
+								</span>
+							</span>
+							<img th:src="@{'/static/picture/'+${products[4].getImgname()}}" alt="portfolio-thumb-5" class="responsive-img">
+						</a>
+					</div>
+					<div class="e-info">
+						<h3 th:text="${products[4].getPtable()}"></h3>
+						<p th:text="${products[4].getPtext()}"></p>
+					</div>
+				</div>
+
+
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<a class="popup" th:href="@{'/static/picture/'+${products[5].getImgname()}}">
+							<span class="o-hover">
+								<span>
+									<i class="fa fa-image fa-2x"></i>
+								</span>
+							</span>
+							<img th:src="@{'/static/picture/'+${products[5].getImgname()}}" alt="portfolio-thumb-6" class="responsive-img">
+						</a>
+					</div>
+					<div class="e-info">
+						<h3 th:text="${products[5].getPtable()}"></h3>
+						<p th:text="${products[5].getPtext()}"></p>
+					</div>
+				</div>
+
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<a class="popup" th:href="@{'/static/picture/'+${products[1].getImgname()}}">
+							<span class="o-hover">
+								<span>
+									<i class="fa fa-image fa-2x"></i>
+								</span>
+							</span>
+							<img th:src="@{'/static/picture/'+${products[1].getImgname()}}" alt="portfolio-thumb-6" class="responsive-img">
+						</a>
+					</div>
+					<div class="e-info">
+						<h3 th:text="${products[1].getPtable()}"></h3>
+						<p th:text="${products[1].getPtext()}"></p>
+					</div>
+				</div>
+
+			</div>
+			&lt;!&ndash; Controls for the work slider &ndash;&gt;
+			<a class="work-prev oc-left"><i class="fa fa-angle-left"></i></a>
+			<a class="work-next oc-right"><i class="fa fa-angle-right"></i></a>
+
+
+		</div>
+	</section>-->
+
+
+	<!-- Work ----------------------------- -->
+	<section id="work" class="work section-slider">
+
+
+		<!-- Title -->
+		<div class="row title">
+			<h2>公司产品</h2>
+			<hr>
+		</div>
+
+
+		<!-- Work slider -->
+		<div class="row relative" >
+			<div class="owlcarousel work-slider" id="product">
+
+				<ul th:each="product:${products}">
+					<li style=" float: left;margin-right: 10px;list-style: none;">
+						<div class="grid-ms">
+
+								<div class="overlay-item">
+									<a class="popup" th:href="@{'/static/picture/'+${product.getImgname()}}">
+									<span class="o-hover">
+										<span>
+											<i class="fa fa-film fa-2x"></i>
+										</span>
+									</span>
+										<img th:src="@{'/static/picture/'+${product.getImgname()}}"  alt="portfolio-thumb-1" class="responsive-img">
+									</a>
+								</div>
+								<div class="e-info">
+									<h3 th:text="${product.getPtable()}"></h3>
+									<p th:text="${product.getPtext()}"></p>
+								</div>
+							</div>
+					</li>
+				</ul>
+			</div>
+			<!-- Controls for the work slider -->
+			<a class="work-prev oc-left"><i class="fa fa-angle-left"></i></a>
+			<a class="work-next oc-right"><i class="fa fa-angle-right"></i></a>
+
+
+		</div>
+	</section>
+
+
+	<!-- Call to action -->
+	<section class="cta bg-img fixed background-four">
+		<div class="row">
+			<div class="twelve col text-center">
+				<h3 class="uber text-white">感谢您已经看到了这里<br>
+				<span class="serif">让我们来谈谈合作吧</span></h3>
+				<a href="#contact" class="scrollto btn outline light">联系我</a>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
+
+
+	<!-- Process -->
+	<section id="process" class="process">
+
+
+		<!-- Title -->
+		<div class="row title title-light">
+			<h2 th:text="${makes[0].getZtable()}"></h2>
+			<hr>
+		</div>
+
+
+		<!-- Process items -->
+		<div class="row equal">
+
+
+			<!-- Process item -->
+			<div class="three col medium-six col small-twelve col">
+				<div class="icon-circle">
+					<i class="fa fa-comments"></i>
+					<h3 class="h6 uber mb0 text-white" th:text="${makes[1].getZtable()}"></h3>
+					<p th:text="${makes[1].getZtable()}"></p>
+				</div>
+			</div>
+
+
+			<!-- Process item -->
+			<div class="three col medium-six col small-twelve col">
+				<div class="icon-circle">
+					<i class="fa fa-cubes"></i>
+					<h3 class="h6 uber mb0 text-white" th:text="${makes[2].getZtable()}"></h3>
+					<p th:text="${makes[2].getZtable()}"></p>
+				</div>
+			</div>
+
+
+			<!-- Process item -->
+			<div class="three col medium-six col small-twelve col">
+				<div class="icon-circle">
+					<i class="fa fa-cogs"></i>
+					<h3 class="h6 uber mb0 text-white" th:text="${makes[3].getZtable()}"></h3>
+					<p th:text="${makes[3].getZtable()}"></p>
+				</div>
+			</div>
+
+
+			<!-- Process item -->
+			<div class="three col medium-six col small-twelve col">
+				<div class="icon-circle">
+					<i class="fa fa-refresh"></i>
+					<h3 class="h6 uber mb0 text-white" th:text="${makes[4].getZtable()}"></h3>
+					<p th:text="${makes[4].getZtable()}"></p>
+				</div>
+			</div>
+
+
+		</div>
+	</section>
+
+
+
+
+	<!-- About -->
+	<section id="about" class="about section-slider">
+
+
+		<!-- Title -->
+		<div class="row title">
+			<h2>公司简介</h2>
+			<hr>
+		</div>
+
+
+		<!-- Content -->
+		<div class="row">
+			<div class="twelve col text-left">
+
+
+				<!-- Header image -->
+				<img th:src="@{'/static/picture/'+${comprofile.getImgname()}}" alt="header-about" class="responsive-img">
+
+
+				<!-- Text -->
+				<div class="bg-white bg-padding">
+					<div class="row">
+						<div class="three col offset-by-two">
+							<h3 class="uber" th:text="${comprofile.getProtable()}"></h3>
+						</div>
+						<div class="five col">
+							<p th:text="${comprofile.getProone()}"></p>
+							<p th:text="${comprofile.getProtwo()}"></p>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+
+		<!-- Quote slider -->
+		<div class="row">
+			<div class="twelve col text-center qs-wrap">
+				<div class="bg-white bg-padding">
+					<div class="row">
+						<div class="eight col offset-by-two">
+
+							<div class="quote-slider">
+
+								<ul th:each="statement:${statements}">
+									<li>
+										<h3 class="uber" th:text="${statement.getOne()}"></h3>
+										<p th:text="${statement.getTwo()}"></p>
+									</li>
+								</ul>
+<!--							<div class="quote-slider">-->
+<!--								&lt;!&ndash; Quote &ndash;&gt;-->
+<!--								<li>-->
+<!--									<h3 class="uber">自我提升，良性竞争。相互欣赏，相互支持</h3>-->
+<!--									<p>XXXX公司</p>-->
+<!--								</li>-->
+
+
+<!--								&lt;!&ndash; Quote &ndash;&gt;-->
+<!--								<li>-->
+<!--									<h3 class="uber">多点沟通，少点抱怨。多点理解，少点争执</h3>-->
+<!--									<p>XXXX公司</p>-->
+<!--								</li>-->
+
+
+
+<!--								&lt;!&ndash; Quote &ndash;&gt;-->
+<!--								<li>-->
+<!--									<h3 class="uber">多点沟通，少点抱怨。多点理解，少点争执</h3>-->
+<!--									<p>XXXX公司</p>-->
+<!--								</li>-->
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		 <!--Employee slider
+		 <div class="row relative">
+			<div class="owlcarousel employee-slider grid-mt">
+
+
+				 Employee
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<span class="o-hover">
+							<span>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-linkedin"></i></a>
+								<a href="#"><i class="fa fa-envelope-o"></i></a>
+							</span>
+						</span>
+						<img src="static/picture/employee-1.jpg" alt="employee-1" class="responsive-img">
+					</div>
+					<div class="e-info">
+						<h3>Gary Gant</h3>
+						<p>CEO &amp; Founder</p>
+					</div>
+				</div>
+
+
+				 Employee
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<span class="o-hover">
+							<span>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href="#"><i class="fa fa-envelope-o"></i></a>
+							</span>
+						</span>
+						<img src="static/picture/employee-2.jpg" alt="employee-2" class="responsive-img">
+					</div>
+					<div class="e-info">
+						<h3>Eve Bayran</h3>
+						<p>Branding Expert</p>
+					</div>
+				</div>
+
+
+				 Employee
+				 <div class="grid-ms">
+					<div class="overlay-item">
+						<span class="o-hover">
+							<span>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-github"></i></a>
+								<a href="#"><i class="fa fa-envelope-o"></i></a>
+							</span>
+						</span>
+						<img src="static/picture/employee-3.jpg" alt="employee-3" class="responsive-img">
+					</div>
+					<div class="e-info">
+						<h3>Mark Robinson</h3>
+						<p>Developer</p>
+					</div>
+				</div>
+
+
+				 Employee
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<span class="o-hover">
+							<span>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-flickr"></i></a>
+								<a href="#"><i class="fa fa-envelope-o"></i></a>
+							</span>
+						</span>
+						<img src="static/picture/employee-4.jpg" alt="employee-4" class="responsive-img">
+					</div>
+					<div class="e-info">
+						<h3>Stacey Cash</h3>
+						<p>Photographer</p>
+					</div>
+				</div>
+
+
+				 Employee
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<span class="o-hover">
+							<span>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-dribbble"></i></a>
+								<a href="#"><i class="fa fa-envelope-o"></i></a>
+							</span>
+						</span>
+						<img src="static/picture/employee-5.jpg" alt="employee-5" class="responsive-img">
+					</div>
+					<div class="e-info">
+						<h3>John Smith</h3>
+						<p>Designer</p>
+					</div>
+				</div>
+
+
+				 Employee
+				<div class="grid-ms">
+					<div class="overlay-item">
+						<span class="o-hover">
+							<span>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-google-plus"></i></a>
+								<a href="#"><i class="fa fa-envelope-o"></i></a>
+							</span>
+						</span>
+						<img src="static/picture/employee-6.jpg" alt="employee-6" class="responsive-img">
+					</div>
+					<div class="e-info">
+						<h3>Lisa Edwards</h3>
+						<p>SEO Expert</p>
+					</div>
+				</div>
+
+
+			</div>
+
+
+			&lt;!&ndash; Controls for the employee slider &ndash;&gt;
+			<a class="emp-prev oc-left"><i class="arrow-control fa fa-angle-left"></i></a>
+			<a class="emp-next oc-right"><i class="arrow-control fa fa-angle-right"></i></a>
+
+
+		</div>-->
+	</section>
+
+
+
+
+	<!-- Contact -->
+	<section id="contact" class="contact">
+
+
+		<!-- Title -->
+		<div class="row title">
+			<h2>联系我们</h2>
+			<hr>
+		</div>
+
+
+		<div class="row">
+
+
+			<!-- Contact form -->
+			<div class="six col offset-by-one">
+
+
+				<!-- Succes message after sending the form, see also the php file around line 90 -->
+				<div id="message" class="c-message"></div>
+
+
+				<!-- Form -->
+<!--				<form method="Post" th:action="@{/insertCustomer}"  class="form form-stacked c-form">-->
+<!--					<fieldset>-->
+
+<!--						<input name="username" type="text" placeholder="怎么称呼您?">-->
+
+<!--						<input name="email" type="email"  placeholder="您的邮箱">-->
+<!--						<input name="phone" type="text" placeholder="手机号">-->
+<!--						<textarea name="comments"  placeholder="请您留言，或者留下您的手机号"></textarea>-->
+<!--						<input type="submit" class="submit btn outline"  value="点击提交">-->
+<!--					</fieldset>-->
+<!--				</form>-->
+
+				<div class="form form-stacked c-form">
+					<fieldset>
+						<input name="cont" type="text" id="cont" placeholder="怎么称呼您?">
+						<input name="email" type="email" id="email" placeholder="您的邮箱">
+						<input name="phone" type="text" id="phone" placeholder="手机号">
+						<textarea name="comments" id="comments" placeholder="请您留言，或者留下您的手机号"></textarea>
+						<input type="submit" class="submit btn outline" id="submit"  value="点击提交">
+					</fieldset>
+				</div>
+			</div>
+
+
+			<!-- Contact details -->
+			<div class="four col text-left">
+
+
+				<h3 class="h6 uber mb0">让我们联系</h3>
+				<p th:text="${contact.getLxtext()}"></p>
+
+
+				<h3 class="h6 uber mb0">联系方式</h3>
+				<address class="c-details">
+					<a href="javascript:;" target="new">
+						<i class="fa fa-map-marker"></i>
+						<span th:text="${contact.getAddress()}"></span>
+					</a>
+					<br>
+					<a href="#">
+						<i class="fa fa-envelope-o"></i>
+						<span th:text="${contact.getEmail()}"></span>
+
+					</a>
+					<br>
+					<a href="#">
+						<i class="fa fa-phone"></i>
+						<span th:text="${contact.getPhone()}"></span>
+					</a>
+					<br>
+					<a href="javascript:void(0)" onMouseOut="hideImg()" onmouseover="showImg()">
+						<i class="fa fa-user"></i>
+						<span>点我显示微信二维码</span>
+						<div id="wxImg" style="display:none;height:50px;back-ground:#f00;position:absolute;">
+							<img style="height: 300px;" th:src="@{'/static/picture/'+${contact.getWeCat()}}">
+						</div>
+					</a>
+				</address>
+			</div>
+
+
+		</div>
+	</section>
+
+
+
+
+	<!-- Back to top -->
+	<div class="back-top-wrap">
+		<a href="#top" class="scrollto"><i class="back-top fa fa-chevron-up"></i></a>
+	</div>
+
+
+
+
+
+
+
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="row">
+			<div class="twelve col">
+				<p style="display: inline;">Copyright © </p>
+				<p style="display: inline;" th:text="${contact.getBeian()}"></p>
+				<p style="display: inline;" th:text="${index1.getWorkname()}"></p>
+			</div>
+		</div>
+	</footer>
+
+
+
+	<script type="text/javascript">
+		function showImg(){
+			document.getElementById("wxImg").style.display='block';
+		}
+		function hideImg(){
+			document.getElementById("wxImg").style.display='none';
+		}
+	</script>
+
+
+
+
+
+
+	<!-- Javascript -->
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/retina.min.js"></script>
+	<script src="/static/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/js/jquery.bxslider.min.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.fitvids.js"></script>
+	<script src="/static/js/jquery.equal.js"></script>
+	<script src="/static/js/main.js"></script>
+
+
+</body>
+</html>

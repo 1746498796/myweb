@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>后台管理</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+    <style>
+        th{
+            width: 125px;
+        }
+        td{
+            vertical-align: middle;
+        }
+    </style>
+
+    <style type="text/css">
+        /* Chart.js */
+
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+
+
+    </style>
+    <script>
+        function randomWord(randomFlag, min, max){
+            var str = "",
+                range = min,
+                arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+            // 随机产生
+            if(randomFlag){
+                range = Math.round(Math.random() * (max-min)) + min;
+            }
+            for(var i=0; i<range; i++){
+                pos = Math.round(Math.random() * (arr.length-1));
+                str += arr[pos];
+            }
+            return str;
+        }
+    </script>
+</head>
+
+<body>
+<div th:insert="~{/comm/comm :: top}"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{comm/comm::sid(active='productlist')}"></div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <h2>
+                <a class="btn btn-sm btn-success" th:href="@{/user/insertproductHtml(id=${products.size()+1})}">添加产品</a>
+                <a class="btn btn-sm btn-success" th:href="@{/index}" target="view_window">查看主页</a>
+            </h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead >
+                    <tr style="text-align: center; vertical-align: middle; ">
+                        <th style="width: 5px;">选择</th>
+                        <th style="width: 5px;">编号</th>
+                        <th >图片</th>
+                        <th style="width: 20px;">产品名</th>
+                        <th>产品介绍</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr   th:each="product : ${products}" style="text-align: center;vertical-align: middle;">
+                        <td style="vertical-align: middle; " >
+                            <input type="checkbox" th:value="${product.getId()}" name="ck">
+                        </td>
+                        <td th:text="${product.getId()}" style="vertical-align: middle;">
+                        </td>
+                        <td >
+                            <img th:src="@{'/static/picture/'+${product.getImgname()}(id=${val})}" alt="图片" width="114px" height="85px"/>
+                        </td>
+                        <td th:text="${product.getPtable()}" style="vertical-align: middle;"></td>
+                        <td th:text="${product.getPtext()}" style="vertical-align: middle;"></td>
+                        <td style="vertical-align: middle; color: white">
+                            <a class="btn btn-success" th:href="@{/user/addproduct/(id=${product.getId()})}">修改</a>
+                            &nbsp;&nbsp;
+                            <a class="btn btn-danger" th:href="@{/user/deleteproduct/(id=${product.getId()})}">删除</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </main>
+
+    </div>
+</div>
+</body>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js" ></script>
+<script type="text/javascript" src="/static/js/popper.min.js" ></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js" ></script>
+
+<!-- Icons -->
+<script type="text/javascript" src="/static/js/feather.min.js" ></script>
+<script>
+    feather.replace()
+</script>
+
+<!-- Graphs -->
+<script type="text/javascript" src="/static/js/Chart.min.js" ></script>
+
+
+
+</html>

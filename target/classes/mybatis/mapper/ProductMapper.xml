@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.ProductMapper">
+    <select id="queryALl" resultType="Product">
+        select *
+        from myweb.product;
+    </select>
+
+    <select id="queryByID" resultType="Product">
+        select *
+        from myweb.product
+        where id = #{id};
+    </select>
+
+    <update id="updateProduct" parameterType="Product">
+        update myweb.product
+        set imgname=#{imgname},ptable=#{ptable},ptext=#{ptext}
+        where id = #{id};
+    </update>
+
+    <insert id="insertProduct" parameterType="Product">
+        insert into myweb.product(id,imgname,ptable,ptext)
+        values(#{id},#{imgname},#{ptable},#{ptext})
+    </insert>
+
+    <delete id="deleteProduct">
+        delete from myweb.product
+        where id = #{id}
+    </delete>
+</mapper>

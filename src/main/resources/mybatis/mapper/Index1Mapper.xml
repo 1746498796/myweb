@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.Index1Mapper">
+    <select id="queryAll" resultType="Index1">
+        select *
+        from myweb.index1;
+    </select>
+
+    <update id="updateAll" parameterType="Index1">
+        update myweb.index1
+        set workname = #{workname},worksay=#{worksay},uber=#{uber},comproducts=#{comproducts},comproductsay=#{comproductsay}
+          ,service=#{service},servicesay=#{servicesay},about=#{about},aboutsay=#{aboutsay},contact=#{contact},contactsay=#{contactsay}
+        where id = #{id};
+    </update>
+</mapper>
