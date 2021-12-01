@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="zh_CN" xmlns:th="https://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -81,7 +81,7 @@
 							<tr  style="text-align: center;vertical-align: middle;">
 								<td style="vertical-align: middle;">
 									<a class="popup" th:href="@{'/uploadimg/'+${comprofile.getImgname()}}">
-										<img class="po" style="width: 40%;height: 40%" th:src="@{'/static/picture/'+${comprofile.getImgname()}}" alt="公司banner">
+										<img class="po" style="width: 40%;height: 40%" th:src="@{'/uploadimg/'+${comprofile.getImgname()}}" alt="公司banner">
 									</a>
 								</td>
 								<td style="vertical-align: middle;" th:text="${comprofile.getProtable()}"></td>

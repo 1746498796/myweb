@@ -15,6 +15,7 @@ public interface CustomerService {
 
     int deleteCustomer(int id);
     List<Customer> queryPage( int pageNum, int pageBig);
+    int deleteAll(int[] ids);
 
 }
 

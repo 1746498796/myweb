@@ -21,5 +21,7 @@ public interface CustomerMapper {
 
     List<Customer> queryPage(@Param("pageNum") int pageNum,@Param("pageBig") int pageBig);
 
+    int deleteAll(int[] ids);
+
 
 }

@@ -29,4 +29,11 @@
         order by times DESC
         limit #{pageNum},#{pageBig}
     </select>
+    
+    <delete id="deleteAll">
+        delete from myweb.customer where  id in 
+        <foreach collection="array" open="(" separator="," close=")" item="id">
+        #{id}
+        </foreach>
+    </delete>
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CustomerController {
@@ -127,10 +128,17 @@ public class CustomerController {
 
     @RequestMapping("/user/pageDelete")
     @ResponseBody
-    public String pageDelete(String[] ids){
-        for (String id:ids){
-            System.out.println(id);
+    public String pageDelete(int[] ids){
+        String msg = null;
+        try {
+            customerService.deleteAll(ids);
+            msg = "1";
+            System.out.println("删除成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            msg = "0";
         }
-        return "删除成功";
+
+        return msg;
     }
 }
