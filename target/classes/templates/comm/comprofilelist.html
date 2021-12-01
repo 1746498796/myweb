@@ -53,7 +53,7 @@
 	</head>
 
 	<body>
-		<div th:insert="~{/comm/comm :: top}"></div>
+		<div th:replace="~{comm/comm :: top}"></div>
 
 		<div class="container-fluid">
 			<div class="row">
@@ -80,7 +80,7 @@
 							<tbody>
 							<tr  style="text-align: center;vertical-align: middle;">
 								<td style="vertical-align: middle;">
-									<a class="popup" th:href="@{'/static/picture/'+${comprofile.getImgname()}}">
+									<a class="popup" th:href="@{'/uploadimg/'+${comprofile.getImgname()}}">
 										<img class="po" style="width: 40%;height: 40%" th:src="@{'/static/picture/'+${comprofile.getImgname()}}" alt="公司banner">
 									</a>
 								</td>

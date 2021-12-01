@@ -42,16 +42,16 @@
 </head>
 
 <body>
-<div th:insert="~{/comm/comm :: top}"></div>
+<div th:replace="~{comm/comm :: top}"></div>
 
 <div class="container-fluid">
     <div class="row">
-        <div th:insert="~{comm/comm::sid(active='productlist')}"></div>
+        <div th:replace="~{comm/comm::sid(active='productlist')}"></div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <h2 style="text-align: center">修改产品信息</h2>
             <form th:action="@{/user/imgfile}" method="post" enctype="multipart/form-data" >
                 <div class="form-group">
-                    <img style="width: 30%;height: 30%;" th:src="@{'/static/picture/'+${product.getImgname()}}" th:alt="${product.getImgname()}" class="img-rounded">
+                    <img style="width: 30%;height: 30%;" th:src="@{'/uploadimg/'+${product.getImgname()}}" th:alt="${product.getImgname()}" class="img-rounded">
                     <input type="text" class="form-control" name="id" id="id" th:value="${product.getId()}" hidden>
                 </div>
                 <div class="form-group">

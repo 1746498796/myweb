@@ -1,6 +1,8 @@
 package com.wang.uitls;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,12 +11,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
+@PropertySource("classpath:application.properties")
 public class ImgFile {
 
+    @Value("${filepath.uploadFolde}")
+    private String filepathOne;
     public String getStringRandom(int length) {
 
         String val = "";
@@ -48,12 +51,42 @@ public class ImgFile {
         //避免文件重复覆盖
         //String filename = null;
         String filename =null;
+        String path = null;
         try {
-            filename= UUID.randomUUID().toString().replaceAll("-", "")+file.getOriginalFilename();
+            String uid= UUID.randomUUID().toString().replaceAll("-", "");
+            filename = file.getOriginalFilename();
+            filename = uid+filename.substring(filename.lastIndexOf("."));
             //文件路径
-            String path = ResourceUtils.getURL("classpath:").getPath()+"static/picture/";
+            //String path = ResourceUtils.getURL("classpath:").getPath()+"static/picture/";
+            path= ResourceUtils.getURL(filepathOne).getPath();
+            //获取后端名
+            //filename.substring((filename.lastIndexOf(".")));
             // 新建文件
            // filename = uuid;
+            File dest = new File(path,filename);
+
+            if (!dest.getParentFile().exists()) {
+                dest.getParentFile().mkdirs();
+            }
+            try {
+                // 写入文件
+                file.transferTo(new File(path + File.separator + filename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return filename;
+    }
+
+
+    public String upload2(MultipartFile file, String filename){
+        try {
+            //文件路径
+            String path = ResourceUtils.getURL(filepathOne).getPath();
+            // 新建文件
+            // filename = uuid;
             File dest = new File(path,filename);
 
             if (!dest.getParentFile().exists()) {

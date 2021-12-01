@@ -28,6 +28,7 @@ public class UserRealm extends AuthorizingRealm {
         info.addStringPermission(currentUser.getPerms());//添加授权认证
 
 
+
         return info;
     }
     //授权方法

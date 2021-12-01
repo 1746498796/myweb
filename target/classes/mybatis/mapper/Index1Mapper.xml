@@ -14,4 +14,13 @@
           ,service=#{service},servicesay=#{servicesay},about=#{about},aboutsay=#{aboutsay},contact=#{contact},contactsay=#{contactsay}
         where id = #{id};
     </update>
+    <select id="querymp4name" resultType="String">
+        select mp4name
+        from myweb.index1;
+    </select>
+    <update id="updatemp4name" parameterType="String">
+        update myweb.index1
+        set mp4name = #{mp4name}
+        where id = #{id};
+    </update>
 </mapper>

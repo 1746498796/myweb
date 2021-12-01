@@ -24,4 +24,9 @@
         delete from myweb.customer
         where id = #{id}
     </delete>
+    <select id="queryPage" resultType="Customer">
+        select * from myweb.customer
+        order by times DESC
+        limit #{pageNum},#{pageBig}
+    </select>
 </mapper>

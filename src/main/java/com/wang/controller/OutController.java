@@ -107,13 +107,13 @@ public class OutController {
         try{
             subject.login(token);//执行登录的方法
 
-            return "dashboard.html";
+            return "redirect:/user/main";
         }catch (UnknownAccountException e){
             model.addAttribute("msg","用户名不存在");
-            return "/wang";
+            return "redirect:/wang";
         }catch (IncorrectCredentialsException e){
             model.addAttribute("msg","用户名不存在");
-            return "/wang";
+            return "redirect:/wang";
         }
 
     }
@@ -122,7 +122,7 @@ public class OutController {
     @RequestMapping("/user/main")
     public String main(){
 
-        return "dashboard";
+        return "comm/outMain";
     }
 
     @RequestMapping("/logout")

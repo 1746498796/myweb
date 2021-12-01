@@ -1,34 +1,47 @@
 package com.wang.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+
 @Configuration
+@PropertySource("classpath:application.properties")
 public class MyConfig implements WebMvcConfigurer {
-//    /**显示相对地址*/
-//    @Value("${file.upload.path.relative}")
-//    private String fileRelativePath;
+
+    @Value("${filepath.uploadFolde}")
+    private String filepath;
+
     //添加视图解析器方法重写
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//
-//
-//
-//    }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new MyHandlerIntercept())//使用addPathPattherns方法传入需要拦截的路径
-//                .addPathPatterns("/**")
-//                //然后在使用excludePatterns方法释放不需要拦截的路径
-//                .excludePathPatterns("/index.html","/","/wang","/css/*","/js/*","/img/*","/image/*","/font/*","/picture/*","/toLogin");
-//    }
+    //registry.addViewController("/user/main.html").setViewName("dashboard");
 
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler(fileRelativePath).addResourceLocations("file:/"+filePath);
-//    }
+    }
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer(){
+        return factory -> {
+            ErrorPage errorPage404 = new ErrorPage(HttpStatus.NOT_FOUND,
+                    "/404");
+            ErrorPage errorPage400 = new ErrorPage(HttpStatus.BAD_REQUEST,
+                    "/500");
+            ErrorPage errorPage500 = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "/500");
+            factory.addErrorPages(errorPage400, errorPage404, errorPage500);
+        };
+    }
 
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/uploadimg/**").addResourceLocations("file:"+filepath);
+    }
 }

@@ -4,6 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +44,7 @@ public class ShiroConfig {
         //设置登录的请求
         bean.setLoginUrl("/wang");
         //设置未授权页面
-        bean.setUnauthorizedUrl("/wsq");
+        //bean.setUnauthorizedUrl("/wsq");
 
 
 
@@ -56,7 +57,16 @@ public class ShiroConfig {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         //传realm对象
         defaultWebSecurityManager.setRealm(userRealm);
+        defaultWebSecurityManager.setSessionManager(mySessionManager());
         return defaultWebSecurityManager;
+    }
+
+    @Bean
+    public DefaultWebSessionManager mySessionManager(){
+        DefaultWebSessionManager defaultSessionManager = new DefaultWebSessionManager();
+        //将sessionIdUrlRewritingEnabled属性设置成false
+        defaultSessionManager.setSessionIdUrlRewritingEnabled(false);
+        return defaultSessionManager;
     }
 
 

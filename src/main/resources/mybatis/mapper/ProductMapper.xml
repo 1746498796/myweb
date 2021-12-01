@@ -5,7 +5,8 @@
 <mapper namespace="com.wang.dao.ProductMapper">
     <select id="queryALl" resultType="Product">
         select *
-        from myweb.product;
+        from myweb.product
+        order by id DESC;
     </select>
 
     <select id="queryByID" resultType="Product">

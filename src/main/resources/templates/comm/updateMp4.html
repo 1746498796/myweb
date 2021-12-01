@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>后台管理</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+    <style>
+        th{
+            width: 125px;
+        }
+
+    </style>
+
+    <style type="text/css">
+        /* Chart.js */
+
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+
+    <script src="/static/js/jquery-3.6.0.js"></script>
+
+</head>
+
+<body>
+<div th:insert="~{comm/comm :: top}"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{comm/comm::sid(active='indexlist')}"></div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="table-responsive">
+
+                <div style="text-align: center">
+                    <img style="width: 20%;height: 20%;" th:src="@{/static/img/left.png}">
+                    <span style="font-weight:bold;font-size: 50px">这里修改主页视频</span>
+                    <img style="width: 20%;height: 20%;" th:src="@{/static/img/right.png}">
+                </div>
+                <div>
+                    <video width="320px" height="240px"  autoplay>
+                        <source th:src="@{'/static/mp4/'+${mp4name}}" type="video/mp4">
+                        <source src="https://www.runoob.com/try/demo_ source/movie.mp4" type="video/ogg">
+                        <source src="https://www.runoob.com/try/demo_ source/movie.webm" type="video/webm">
+                        <object data="movie.mp4" width="320" height="240">
+                            <embed src="https://www.runoob.com/try/demo_ source/movie.swf" width="320" height="240">
+                        </object>
+                    </video>
+                    <form th:action="@{/user/updatevideo}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="lastName0">上传视频</label>
+                        <input type="file" name="file123" class="form-control" accept="video/mp4">
+                        <input type="text" class="form-control" name="mp4name" id="lastName0" th:value="${mp4name}" readonly>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success" id="btn">上传视频</button>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+</div>
+</body>
+
+</html>

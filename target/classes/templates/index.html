@@ -395,15 +395,14 @@
 				<ul th:each="product:${products}">
 					<li style=" float: left;margin-right: 10px;list-style: none;">
 						<div class="grid-ms">
-
 								<div class="overlay-item">
-									<a class="popup" th:href="@{'/static/picture/'+${product.getImgname()}}">
+									<a class="popup" th:href="@{'/uploadimg/'+${product.getImgname()}}">
 									<span class="o-hover">
 										<span>
 											<i class="fa fa-film fa-2x"></i>
 										</span>
 									</span>
-										<img th:src="@{'/static/picture/'+${product.getImgname()}}"  alt="portfolio-thumb-1" class="responsive-img">
+										<img th:src="@{'/uploadimg/'+${product.getImgname()}}"  alt="portfolio-thumb-1" class="responsive-img">
 									</a>
 								</div>
 								<div class="e-info">
@@ -520,7 +519,7 @@
 
 
 				<!-- Header image -->
-				<img th:src="@{'/static/picture/'+${comprofile.getImgname()}}" alt="header-about" class="responsive-img">
+				<img style="width: 100%;" th:src="@{'/uploadimg/'+${comprofile.getImgname()}}" alt="header-about" class="responsive-img">
 
 
 				<!-- Text -->
@@ -796,7 +795,7 @@
 						<i class="fa fa-user"></i>
 						<span>点我显示微信二维码</span>
 						<div id="wxImg" style="display:none;height:50px;back-ground:#f00;position:absolute;">
-							<img style="height: 300px;" th:src="@{'/static/picture/'+${contact.getWeCat()}}">
+							<img style="height: 300px;" th:src="@{'/uploadimg/'+${contact.getWeCat()}}">
 						</div>
 					</a>
 				</address>

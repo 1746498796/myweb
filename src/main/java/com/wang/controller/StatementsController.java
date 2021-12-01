@@ -4,6 +4,8 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.wang.pojo.Statements;
 import com.wang.serviceImpl.StatementsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
+@PropertySource("application.properties")
 public class StatementsController {
 
     @Autowired
@@ -20,7 +23,7 @@ public class StatementsController {
     public  String statementslistHtml(Model model){
         List<Statements> statements = statementsService.queryAll();
         model.addAttribute("statements",statements);
-        return "/comm/statementslist";
+        return "comm/statementslist";
     }
 
     @RequestMapping("/user/updateStatementsHtml")
@@ -28,7 +31,7 @@ public class StatementsController {
         Statements statement = statementsService.queryByID(id);
         model.addAttribute("statement",statement);
 
-        return "/comm/updateStatements";
+        return "comm/updateStatements";
     }
 
     @RequestMapping("/user/updateStatements")
@@ -42,7 +45,7 @@ public class StatementsController {
         //List<Statements> statements = statementsService.queryAll();
         System.out.println(id);
         model.addAttribute("id",id);
-        return "/comm/insertStatements";
+        return "comm/insertStatements";
     }
 
 

@@ -25,4 +25,14 @@ public class Index1ServiceImpl implements Index1Service {
     public int updateAll(Index1 index1) {
         return index1Mapper.updateAll(index1);
     }
+
+    @Override
+    public int updatemp4name(String mp4name) {
+        return index1Mapper.updatemp4name(mp4name);
+    }
+
+    @Override
+    public String querymp4name() {
+        return index1Mapper.querymp4name();
+    }
 }

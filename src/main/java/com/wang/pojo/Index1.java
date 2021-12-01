@@ -20,5 +20,6 @@ public class Index1 {
     private String aboutsay;
     private String contact;
     private String contactsay;
+    private String mp4name;
 
 }

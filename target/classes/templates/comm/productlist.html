@@ -70,7 +70,7 @@
 </head>
 
 <body>
-<div th:insert="~{/comm/comm :: top}"></div>
+<div th:replace="~{comm/comm :: top}"></div>
 
 <div class="container-fluid">
     <div class="row">
@@ -84,8 +84,7 @@
                 <table class="table table-striped table-sm">
                     <thead >
                     <tr style="text-align: center; vertical-align: middle; ">
-                        <th style="width: 5px;">选择</th>
-                        <th style="width: 5px;">编号</th>
+                        <th style="width: 20px;">选择</th>
                         <th >图片</th>
                         <th style="width: 20px;">产品名</th>
                         <th>产品介绍</th>
@@ -97,10 +96,9 @@
                         <td style="vertical-align: middle; " >
                             <input type="checkbox" th:value="${product.getId()}" name="ck">
                         </td>
-                        <td th:text="${product.getId()}" style="vertical-align: middle;">
                         </td>
                         <td >
-                            <img th:src="@{'/static/picture/'+${product.getImgname()}(id=${val})}" alt="图片" width="114px" height="85px"/>
+                            <img th:src="@{'/uploadimg/'+${product.getImgname()}(id=${val})}" alt="图片" width="114px" height="85px"/>
                         </td>
                         <td th:text="${product.getPtable()}" style="vertical-align: middle;"></td>
                         <td th:text="${product.getPtext()}" style="vertical-align: middle;"></td>

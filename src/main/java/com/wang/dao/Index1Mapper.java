@@ -12,4 +12,6 @@ public interface Index1Mapper {
 
     Index1 queryAll();
     int updateAll(Index1 index1);
+    int updatemp4name(@Param("mp4name") String mp4name);
+    String querymp4name();
 }

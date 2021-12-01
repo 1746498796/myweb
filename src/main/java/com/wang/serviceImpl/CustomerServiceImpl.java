@@ -31,4 +31,9 @@ public class CustomerServiceImpl implements CustomerService {
     public int deleteCustomer(int id) {
         return customerMapper.deleteCustomer(id);
     }
+
+    @Override
+    public List<Customer> queryPage(int pageNum, int pageBig) {
+        return customerMapper.queryPage(pageNum,pageBig);
+    }
 }

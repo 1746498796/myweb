@@ -14,5 +14,7 @@ public interface CustomerService {
     int updateCustomer(Customer customer);
 
     int deleteCustomer(int id);
+    List<Customer> queryPage( int pageNum, int pageBig);
+
 }
 

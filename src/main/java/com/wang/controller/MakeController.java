@@ -18,7 +18,7 @@ public class MakeController {
     public String makelist(Model model){
         List<Make> makes = makeService.queryAll();
         model.addAttribute("makes",makes);
-        return "/comm/makelist";
+        return "comm/makelist";
     }
 
     @RequestMapping("/user/updatemake")

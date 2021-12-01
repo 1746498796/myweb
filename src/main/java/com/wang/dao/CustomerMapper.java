@@ -19,4 +19,7 @@ public interface CustomerMapper {
 
     int deleteCustomer(@Param("id")int id);
 
+    List<Customer> queryPage(@Param("pageNum") int pageNum,@Param("pageBig") int pageBig);
+
+
 }

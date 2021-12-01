@@ -18,12 +18,13 @@ public class CustomerController {
     @Autowired
     CustomerServiceImpl customerService;
 
-    @RequestMapping("/user/customerlist")
-    public String customerListHtml(Model model){
-        List<Customer> customers = customerService.queryAll();
-        model.addAttribute("customers",customers);
-        return "/comm/customerList";
-    }
+//    @RequestMapping("/user/customerlist")
+//    public String customerListHtml(Model model){
+//        //List<Customer> customers = customerService.queryAll();
+//        List<Customer> customers = customerService.queryPage(0, 10);
+//        model.addAttribute("customers",customers);
+//        return "/comm/customerList";
+//    }
 
 
 //    @RequestMapping("/user/customerList")
@@ -61,20 +62,6 @@ public class CustomerController {
 
 
 
-    @GetMapping("/user/inser")
-    @ResponseBody
-    public String inser(String username){
-        String msg=null;
-        System.out.println(username);
-        //int i = customerService.insertCustomer(customer);
-//        if(i != 0){
-//            msg ="提交成功";
-//        }else {
-//            msg ="提交失败";
-//        }
-        return msg;
-    }
-
 
 
 
@@ -85,6 +72,65 @@ public class CustomerController {
     @GetMapping("/user/deleteCustomer")
     public  String deleteCustomer(int id){
         customerService.deleteCustomer(id);
-        return "redirect:/user/customerlist";
+        return "redirect:/user/page";
+    }
+    @RequestMapping("/for")
+    @ResponseBody
+    public String for100(){
+        Customer customer = new Customer();
+        for (int i = 0; i < 7; i++) {
+            String name = "li"+i;
+            customer.setCont(name);
+            customer.setEmail(name);
+            customer.setPhone(name);
+            customer.setComments(name);
+            customerService.insertCustomer(customer);
+        }
+        return "ok";
+    }
+
+
+
+    @RequestMapping("/user/page")
+    public String page(String page,Model model){
+        int pageStart;//开始页
+        int pageSubscript;//起始下标
+        int pageNum=10;//每页个数
+        int pageSize;
+        int size;
+
+
+
+        if (page == null){
+            pageStart = 1;
+        }else {
+            pageStart=Integer.valueOf(page);
+
+        }
+
+        pageSubscript =(pageStart-1)*10;
+        size = customerService.queryAll().size();//数据总数
+        System.out.println(size);
+
+
+        pageNum=10;//每页个数
+        pageSize=(size%10!=0?(size/10)+1:size/10);//最多页
+        System.out.println(pageSize);
+
+
+        List<Customer> customers = customerService.queryPage(pageSubscript, pageNum);
+        model.addAttribute("customers",customers);
+        model.addAttribute("pageSize",pageSize);
+        model.addAttribute("pageStart",pageStart);
+        return "comm/customerList";
+    }
+
+    @RequestMapping("/user/pageDelete")
+    @ResponseBody
+    public String pageDelete(String[] ids){
+        for (String id:ids){
+            System.out.println(id);
+        }
+        return "删除成功";
     }
 }
